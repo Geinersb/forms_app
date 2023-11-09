@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'counter_state.dart';
 
-//se llama al counterState que se llama mi estado
+//se llama al counterState que es como se llama mi estado
 class CounterCubit extends Cubit<CounterState> {
   CounterCubit() : super(CounterState(counter: 5));
 
@@ -21,7 +21,7 @@ class CounterCubit extends Cubit<CounterState> {
   void reset() {
      emit(state.copyWith(
         counter: 0,
-        transactionCount: state.transactionCount + 1
+       
         ));
   }
 }
