@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'counter_state.dart';
 
 //se llama al counterState que es como se llama mi estado
 class CounterCubit extends Cubit<CounterState> {
-  CounterCubit() : super(CounterState(counter: 5));
+  CounterCubit() : super(const CounterState(counter: 5));
 
 //aqui hago un metodo el cual llama la copia del estado 
 //y cambia el valor de las variables en el estado
