@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:forms_app/presentation/blocs/counter_bloc/counter_bloc.dart';
 
 class BlocCounterScreen extends StatelessWidget {
   const BlocCounterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) =>CounterBloc(),
+      child: const BlocCounterView()
+      );
+  }
+}
+
+class BlocCounterView extends StatelessWidget {
+  const BlocCounterView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +32,8 @@ class BlocCounterScreen extends StatelessWidget {
            icon:const Icon(Icons.refresh_rounded))
         ],
       ),
-      body: const Center(
-        child:  Text('Counter value: xxx'),
+      body:  Center(
+        child: context.select((CounterBloc counterBloc)=>Text('Counter value: ${counterBloc.state.counter}')) ,
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
