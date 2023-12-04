@@ -54,6 +54,8 @@ class _RegisterForm extends StatelessWidget {
     final registerCubit = context.watch<RegisterCubit>();
     final username = registerCubit.state.username;
     final password = registerCubit.state.password;
+    final email = registerCubit.state.email;
+    
 
     return Form(
         child: Column(
@@ -65,41 +67,28 @@ class _RegisterForm extends StatelessWidget {
           icon: const Icon(Icons.supervised_user_circle_outlined,
               color: Colors.purpleAccent),
         ),
+
         const SizedBox(height: 10),
+
         CustomTextFormField(
           label: 'Correo eléctronico',
-          onChanged: (value) {
-            registerCubit.emailChanged(value);
-          },
-          validator: (value) {
-            if (value == null || value.isEmpty) return 'Campo Requerido';
-            if (value.trim().isEmpty) return 'Campo Requerido';
-            final emailRegExp = RegExp(
-              r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-            );
-
-            if (!emailRegExp.hasMatch(value)) return 'Ingresar correo valido';
-
-            return null;
-          },
+          onChanged: registerCubit.emailChanged,
+          errorMessage: email.errorMessage,
           icon: const Icon(Icons.email_outlined, color: Colors.purpleAccent),
         ),
+
         const SizedBox(height: 10),
+
         CustomTextFormField(
           label: 'Contraseña',
-          onChanged: (value) {
-            registerCubit.passwordChanged(value);
-          },
-          validator: (value) {
-            if (value == null || value.isEmpty) return 'Campo Requerido';
-            if (value.trim().isEmpty) return 'Campo Requerido';
-            if (value.length < 6) return 'Debe ser mas de 6 letras';
-            return null;
-          },
+          onChanged: registerCubit.passwordChanged,
+           errorMessage: password.errorMessage,
           icon: const Icon(Icons.password_outlined, color: Colors.purpleAccent),
           obscureText: true,
         ),
+
         const SizedBox(height: 20),
+
         FilledButton.tonalIcon(
             onPressed: () {
               // final isValid = _formKey.currentState!.validate();
